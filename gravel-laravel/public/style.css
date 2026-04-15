@@ -1,0 +1,670 @@
+/* --- 1. VARIABLES GLOBALES --- */
+:root {
+    --strava-orange: #fc4c02;
+    --orange-dark: #d63e00;
+    --body-bg: #f7f7fa;
+    --dark-bg: #2c3340;
+    --dark2: #364050;
+    --text-dark: #2d3436;
+    --text-light: #636e72;
+    --text-muted-dark: #a0aab4;
+    --border-color: #e6e6e6;
+    --white: #ffffff;
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    color: var(--text-dark);
+    background-color: var(--body-bg);
+}
+
+/* =========================================
+   2. LOGIN — Layout dividido
+   ========================================= */
+
+.login-page {
+    display: flex;
+    min-height: 100vh;
+    overflow: hidden;
+    background: var(--dark-bg);
+}
+
+/* Panel izquierdo — Hero */
+.hero-panel {
+    flex: 1.1;
+    background: var(--dark2);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 48px;
+    overflow: hidden;
+}
+
+.hero-panel::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        repeating-linear-gradient(
+            -55deg,
+            transparent,
+            transparent 40px,
+            rgba(252,76,2,0.02) 40px,
+            rgba(252,76,2,0.02) 41px
+        );
+}
+
+.hero-panel::after {
+    content: '';
+    position: absolute;
+    top: -120px; right: -120px;
+    width: 420px; height: 420px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(252,76,2,0.10) 0%, transparent 70%);
+}
+
+/* Logo */
+.hero-logo {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    z-index: 2;
+    position: relative;
+}
+
+.logo-icon {
+    width: 52px; height: 52px;
+    background: var(--strava-orange);
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.6rem;
+    box-shadow: 0 8px 24px rgba(252,76,2,0.4);
+}
+
+.logo-text {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 1.5rem;
+    font-weight: 900;
+    letter-spacing: 3px;
+    color: var(--white);
+    line-height: 1;
+    text-transform: uppercase;
+}
+
+.logo-text span { color: var(--strava-orange); }
+
+.logo-sub {
+    color: var(--text-muted-dark);
+    font-size: 0.65rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-top: 3px;
+}
+
+/* Contenido Hero — centro */
+.hero-content {
+    position: relative;
+    z-index: 2;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 40px 0;
+}
+
+.hero-tag {
+    display: inline-block;
+    background: rgba(252,76,2,0.15);
+    border: 1px solid rgba(252,76,2,0.3);
+    color: var(--strava-orange);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 20px;
+    margin-bottom: 24px;
+    width: fit-content;
+}
+
+.hero-title {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 3.8rem;
+    font-weight: 900;
+    line-height: 1.0;
+    color: var(--white);
+    letter-spacing: 1px;
+    margin-bottom: 24px;
+    text-transform: uppercase;
+}
+
+.hero-title span { color: var(--strava-orange); }
+
+.hero-desc {
+    color: var(--text-muted-dark);
+    font-size: 1rem;
+    line-height: 1.8;
+    max-width: 380px;
+    margin-bottom: 0;
+}
+
+/* Stats — parte inferior */
+.hero-footer {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-divider {
+    width: 100%;
+    height: 1px;
+    background: rgba(255,255,255,0.07);
+    margin-bottom: 32px;
+}
+
+.hero-stats { display: flex; gap: 40px; }
+
+.hero-stat-item .num {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--white);
+    letter-spacing: 1px;
+    line-height: 1;
+}
+
+.hero-stat-item .lbl {
+    font-size: 0.72rem;
+    color: var(--text-muted-dark);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-top: 4px;
+}
+
+.divider-v {
+    width: 1px;
+    background: rgba(255,255,255,0.07);
+    align-self: stretch;
+}
+
+/* Panel derecho — Formulario */
+.login-form-panel {
+    flex: 0 0 560px;
+    background: var(--dark-bg);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 60px 64px;
+    position: relative;
+    overflow-y: auto;
+}
+
+.login-form-panel::before {
+    content: '';
+    position: absolute;
+    bottom: -80px; left: -80px;
+    width: 280px; height: 280px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(252,76,2,0.08) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.form-title {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--white);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+}
+
+.form-subtitle {
+    color: var(--text-muted-dark);
+    font-size: 0.88rem;
+    margin-bottom: 32px;
+}
+
+/* Tabs del login */
+.login-tabs {
+    display: flex;
+    background: var(--dark2);
+    border-radius: 10px;
+    padding: 4px;
+    margin-bottom: 28px;
+    gap: 4px;
+}
+
+.login-tab-btn {
+    flex: 1;
+    padding: 9px;
+    border: none;
+    background: transparent;
+    color: var(--text-muted-dark);
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.22s;
+    letter-spacing: 0.5px;
+}
+
+.login-tab-btn.active {
+    background: var(--strava-orange);
+    color: white;
+    box-shadow: 0 4px 14px rgba(252,76,2,0.35);
+}
+
+/* Campos del login */
+.login-field { margin-bottom: 18px; }
+
+.login-field label {
+    display: block;
+    color: var(--text-muted-dark);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+}
+
+.login-field .input-wrap { position: relative; }
+
+.login-field .input-wrap i {
+    position: absolute;
+    left: 14px; top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted-dark);
+    font-size: 0.95rem;
+}
+
+.login-field input {
+    width: 100%;
+    background: var(--dark2);
+    border: 1.5px solid rgba(255,255,255,0.07);
+    border-radius: 10px;
+    padding: 13px 14px 13px 40px;
+    color: var(--white);
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-size: 0.92rem;
+    transition: all 0.2s;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.login-field input::placeholder { color: #4a5568; }
+
+.login-field input:focus {
+    border-color: var(--strava-orange);
+    background: #1e2329;
+    box-shadow: 0 0 0 3px rgba(252,76,2,0.12);
+}
+
+/* Botón submit del login */
+.btn-login {
+    width: 100%;
+    padding: 14px;
+    background: var(--strava-orange);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.22s;
+    margin-top: 8px;
+    box-shadow: 0 6px 20px rgba(252,76,2,0.3);
+}
+
+.btn-login:hover {
+    background: var(--orange-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px rgba(252,76,2,0.4);
+}
+
+.btn-login:active { transform: translateY(0); }
+
+/* Alertas del login */
+.login-alert {
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 0.85rem;
+    margin-bottom: 14px;
+    display: none;
+}
+
+.login-alert-error {
+    background: rgba(214,48,49,0.12);
+    border: 1px solid rgba(214,48,49,0.3);
+    color: #ff7675;
+}
+
+.login-alert-success {
+    background: rgba(0,184,148,0.12);
+    border: 1px solid rgba(0,184,148,0.3);
+    color: #55efc4;
+}
+
+/* Secciones login/registro */
+.login-section { display: none; }
+.login-section.active { display: block; }
+
+/* Animación entrada */
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.login-form-panel > * {
+    animation: fadeUp 0.5s ease both;
+}
+
+/* =========================================
+   3. ESTILOS DEL DASHBOARD (app.html y otros)
+   ========================================= */
+
+.main-header {
+    background-color: var(--white);
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.brand {
+    color: var(--strava-orange);
+    font-weight: 800;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+}
+
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+}
+
+.avatar {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--strava-orange);
+}
+
+/* Grid Principal */
+.layout-container {
+    display: flex;
+    max-width: 1200px;
+    margin: 20px auto;
+    gap: 20px;
+    padding: 0 10px;
+    align-items: flex-start;
+}
+
+/* Navegación Izquierda */
+.main-nav { width: 200px; flex-shrink: 0; }
+.main-nav ul { list-style: none; padding: 0; }
+.main-nav a {
+    display: block;
+    padding: 10px;
+    color: var(--text-light);
+    text-decoration: none;
+    font-weight: 500;
+    border-radius: 4px;
+}
+
+.main-nav a:hover, .main-nav a.active {
+    color: var(--strava-orange);
+    font-weight: bold;
+    border-left: 3px solid var(--strava-orange);
+    background: var(--white);
+}
+
+.logout { color: #d63031 !important; margin-top: 20px; }
+
+/* Contenido Central */
+.feed-content { flex-grow: 1; }
+.feed-content h2 { margin-top: 0; font-size: 1.2rem; }
+
+.activity-card {
+    background: var(--white);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.activity-header { display: flex; gap: 10px; margin-bottom: 15px; }
+.mini-avatar { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; }
+.date { font-size: 0.8rem; color: var(--text-light); }
+
+.stats-grid {
+    display: flex;
+    gap: 30px;
+    margin: 15px 0;
+    border-top: 1px solid #f0f0f0;
+    padding-top: 10px;
+}
+
+.stat { display: flex; flex-direction: column; }
+.stat .label { font-size: 0.75rem; color: var(--text-light); }
+.stat .value { font-size: 1.1rem; font-weight: 600; }
+
+/* Sidebar Derecha */
+.sidebar-right { width: 250px; flex-shrink: 0; }
+
+.widget {
+    background: var(--white);
+    padding: 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    margin-bottom: 15px;
+}
+
+.widget h3 { margin-top: 0; font-size: 0.9rem; color: var(--text-light); text-transform: uppercase; }
+
+.club-list { list-style: none; padding: 0; font-size: 0.9rem; }
+.club-list li { padding: 5px 0; border-bottom: 1px solid #eee; }
+
+.progress-bar { width: 100%; height: 8px; background: #eee; border-radius: 4px; margin: 5px 0; }
+.fill { height: 100%; background: var(--strava-orange); border-radius: 4px; }
+
+/* Botón principal */
+.btn-main {
+    width: 100%;
+    padding: 15px;
+    background-color: var(--strava-orange);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-top: 15px;
+    transition: 0.3s;
+    text-transform: uppercase;
+}
+
+.btn-main:hover {
+    background-color: #d35400;
+    transform: translateY(-2px);
+}
+
+/* Footer */
+.main-footer {
+    text-align: center;
+    padding: 20px;
+    color: var(--text-light);
+    font-size: 0.8rem;
+    border-top: 1px solid var(--border-color);
+    margin-top: 40px;
+    background: var(--white);
+}
+
+/* =========================================
+   4. RESPONSIVE
+   ========================================= */
+@media (max-width: 768px) {
+    .login-page { flex-direction: column; overflow: auto; }
+    .hero-panel { flex: none; min-height: 260px; padding: 28px; }
+    .hero-title { font-size: 2.4rem; }
+    .hero-stats { gap: 20px; }
+    .login-form-panel { flex: none; padding: 36px 28px; }
+    .hero-panel::after { width: 250px; height: 250px; top: -60px; right: -60px; }
+    .layout-container { flex-direction: column; }
+    .main-nav, .sidebar-right { width: 100%; }
+}
+
+/* =========================================
+   5. ANIMACIONES GLOBALES
+   ========================================= */
+
+/* Fade + slide al cargar página */
+@keyframes pageEnter {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+@keyframes slideInLeft {
+    from { opacity: 0; transform: translateX(-24px); }
+    to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInRight {
+    from { opacity: 0; transform: translateX(24px); }
+    to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Header animado */
+.main-header {
+    animation: fadeIn 0.4s ease both;
+}
+
+/* Nav izquierda */
+.main-nav {
+    animation: slideInLeft 0.5s ease both;
+    animation-delay: 0.1s;
+}
+
+/* Sidebar derecha */
+.sidebar-right {
+    animation: slideInRight 0.5s ease both;
+    animation-delay: 0.2s;
+}
+
+/* Contenido central */
+.feed-content {
+    animation: slideInUp 0.5s ease both;
+    animation-delay: 0.15s;
+}
+
+/* Tarjetas de actividad con stagger */
+.activity-card {
+    animation: slideInUp 0.4s ease both;
+    transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.activity-card:hover {
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    transform: translateY(-2px);
+}
+
+/* KPI cards */
+.kpi-card {
+    animation: slideInUp 0.4s ease both;
+    transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.kpi-card:hover {
+    box-shadow: 0 4px 16px rgba(252,76,2,0.12);
+    transform: translateY(-2px);
+}
+
+/* Widgets sidebar */
+.widget {
+    animation: slideInRight 0.4s ease both;
+    transition: box-shadow 0.2s;
+}
+
+.widget:hover {
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+
+/* Botones con efecto */
+.btn-main {
+    transition: all 0.22s;
+}
+.btn-main:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(252,76,2,0.3);
+}
+
+/* Header del dashboard con imagen de fondo */
+.dashboard-hero {
+    background: linear-gradient(135deg, rgba(45,52,54,0.85) 0%, rgba(252,76,2,0.7) 100%),
+                url('img/hero-ciclista.jpg') center/cover no-repeat;
+    border-radius: 12px;
+    padding: 32px 28px;
+    margin-bottom: 24px;
+    color: white;
+    position: relative;
+    overflow: hidden;
+    animation: pageEnter 0.6s ease both;
+}
+
+.dashboard-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+        -55deg, transparent, transparent 40px,
+        rgba(255,255,255,0.02) 40px, rgba(255,255,255,0.02) 41px
+    );
+}
+
+.dashboard-hero h2 {
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-bottom: 4px;
+    position: relative;
+    z-index: 1;
+}
+
+.dashboard-hero p {
+    opacity: 0.88;
+    margin-bottom: 0;
+    position: relative;
+    z-index: 1;
+    font-size: 0.92rem;
+}
+
+.dashboard-hero .hero-date {
+    font-size: 0.78rem;
+    opacity: 0.7;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+    position: relative;
+    z-index: 1;
+}
