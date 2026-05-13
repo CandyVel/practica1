@@ -29,4 +29,6 @@ RUN php artisan migrate --force
 RUN chmod -R 777 storage bootstrap/cache database
 RUN chown -R www-data:www-data storage bootstrap/cache database
 
+RUN php artisan storage:link
+
 EXPOSE 80
