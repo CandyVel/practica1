@@ -75,6 +75,13 @@
                     <li>📅 Última salida: <strong id="resUltima">—</strong></li>
                 </ul>
             </div>
+
+            <div class="widget">
+                <h3><i class="bi bi-cloud-sun me-1"></i>Clima en Oaxaca</h3>
+                <div id="climaWidget">
+                    <p class="small text-muted">Cargando clima...</p>
+                </div>
+            </div>
         </aside>
     </div>
 
@@ -274,5 +281,7 @@
 
         renderActividades();
     </script>
+
+    <script src="{{ asset('clima.js') }}"></script>
 </body>
 </html>
