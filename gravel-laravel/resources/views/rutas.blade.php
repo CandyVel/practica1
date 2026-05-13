@@ -84,7 +84,9 @@
                 <li><a href="/rutas" class="active"><i class="bi bi-map me-2"></i>Mapas / Rutas</a></li>
                 <li><a href="/entrenamiento"><i class="bi bi-heart-pulse me-2"></i>Entrenamiento</a></li>
                 <li><a href="/" class="logout" id="btnLogout"><i class="bi bi-box-arrow-left me-2"></i>Cerrar Sesion</a></li>
+                @if(Auth::user()->role === 'admin')
                 <li><a href="/usuarios"><i class="bi bi-people me-2"></i>Gestionar Usuarios</a></li>
+                @endif
             </ul>
         </nav>
 
