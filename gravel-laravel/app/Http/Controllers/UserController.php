@@ -16,15 +16,26 @@ class UserController extends Controller
 
     public function store(Request $request)
     {
-        User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'role' => $request->role ?? 'cliente'
+        $request->validate([
+            'name'     => 'required',
+            'email'    => 'required|email|unique:users,email',
+            'password' => 'required|min:4',
+        ], [
+            'email.unique' => 'Este correo ya está registrado. Intenta con otro.',
+            'password.min' => 'La contraseña debe tener al menos 4 caracteres.',
+            'name.required' => 'El nombre es obligatorio.',
         ]);
+
+        User::create([
+            'name'     => $request->name,
+            'email'    => $request->email,
+            'password' => Hash::make($request->password),
+            'role'     => $request->role ?? 'cliente'
+        ]);
+
         return back();
     }
-
+    
     public function update(Request $request, $id)
     {
         $usuario = User::findOrFail($id);
